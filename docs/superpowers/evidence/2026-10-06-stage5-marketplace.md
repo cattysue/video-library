@@ -48,5 +48,7 @@
 |---|---|
 | Claude Code 2.1.278 | `claude plugin marketplace add cattysue/video-library` → "Successfully added marketplace: video-library" ✓ / `claude plugin install video-library@video-library` → "Successfully installed plugin (scope: user)" ✓ / `claude plugin list` → enabled, 1.0.0 ✓ / `claude plugin details video-library` → 스킬 1개(video-library), 설명 표시 ✓ |
 | Codex 0.155.1 | `codex plugin marketplace add cattysue/video-library` → GitHub에서 받아 추가 ✓ / `codex plugin add video-library@video-library` → 설치 ✓ / `codex plugin list` → "installed, enabled 1.0.0" ✓ / 설치 폴더에 `skills/video-library/SKILL.md`(설명문 정상)·`scripts`·`web` ✓ |
-| 새 대화에서 "영상자료실 열어줘" | 사용자 확인 대기 |
+| 새 대화에서 영상자료실 열기 | 사용자 확인 ✓ — Claude Code·Codex 둘 다 새 대화에서 영상자료실 화면이 열림 |
 
+## 설치 뒤 사용자 요청
+- 조약돌 단추 한 단계 더 작게(글자 13px, 여백 4px 12px, [보기] 5px 15px, 단추 사이 8px) → 테스트 `test_pebbles_are_compact`, 전체 415개 통과, 내 PC 영상자료실 화면에 반영·스크린샷 확인 ✓. 공개 저장소·설치본 반영(버전 1.0.1)은 사용자 승인 대기.

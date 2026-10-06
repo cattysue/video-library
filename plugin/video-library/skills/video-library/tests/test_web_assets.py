@@ -102,3 +102,11 @@ def test_public_visitors_never_get_pc_only_messages():
 def test_empty_library_shows_installed_command_names():
     page = read("library.html")
     assert "/video-library:video-library" in page and "$video-library" in page
+
+
+def test_pebbles_are_compact():
+    # 사용자 요청(10-06): 조약돌 단추를 한 단계 더 작게
+    css = read("app.css")
+    block = css.split(".pebble {", 1)[1].split("}", 1)[0]
+    assert "padding: 4px 12px" in block and "font-size: 13px" in block
+    assert ".pebble.view { width: max-content; padding: 5px 15px; }" in css

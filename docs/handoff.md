@@ -7,15 +7,17 @@
 | 영역 | 상태 | 근거 |
 |---|---|---|
 | 요구사항·설계 | 설계서 **승인**(10-05) | [설계서](superpowers/specs/2026-10-05-video-library-design.md) |
+| Codex 영상자료실 열기 | 10-06 설치된 스킬의 `open` 실행 성공, 로컬 화면 HTTP 200 확인. 사용자 화면 표시·개별 강의 재생은 미확인 | [증거](superpowers/evidence/2026-10-06-codex-library-open.md) |
 | 1단계 약속 | 완료 — 스키마·검사기·샘플·`vl.py validate`·API 문서 (`main`에 합침) | [증거](superpowers/evidence/2026-10-05-stage1-contract.md), [API](api.md) |
 | 2단계 플러그인 처리 | 완료 — config·jobs·fetch(yt-dlp)·preprocess·chunk·check·merge·library·assemble·doctor·SKILL.md, 실제 영상 1편 처리 성공 (`main`에 합침) | [증거](superpowers/evidence/2026-10-05-stage2-pipeline.md) |
 | 3단계 화면 + PC 서버 | 완료 — store_file·search·server·opener, 목록·강의 화면, `vl.py open/serve/search`, 실제 영상 4편(개발·과학 EN→KO·금융·의학) 화면 확인 (`main`에 합침), 최종 검토 중요 5건 수정, 분야 단추·[보기] 조약돌 디자인, 테스트 307개 | [증거](superpowers/evidence/2026-10-06-stage3-viewer.md), [API](api.md) |
 | 4단계 Railway | 완료 — 공개 서버 모드·로그인·업로드·connect, 최종 검토 수정, Railway 배포(`https://video-library-production-8b85.up.railway.app`, 데모 1편 공개), 테스트 396개 (`main`에 합침) | [계획](superpowers/plans/2026-10-06-stage4-railway.md) |
-| 5단계 마켓플레이스 | Task 1~5 완료(매니페스트·요청 문구·README·안내서·공개 전 정리·새 기록), 공개 전 독립 검토 수정. 남은 것: GitHub 공개·Railway 재배포(Task 6)·실제 설치 확인(Task 7), 단계마다 승인 | [계획](superpowers/plans/2026-10-06-stage5-marketplace.md), [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 5단계 마켓플레이스 | 완료 — 공개 저장소 https://github.com/cattysue/video-library (MIT), Claude Code·Codex 마켓플레이스 설치 확인(새 대화에서 영상자료실 열림), README·1:1 수업 안내서, Railway 재배포 | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
 
 **다음에 할 일:**
 1. 하루 뒤 Railway 사용액 확인.
-2. 5단계 Task 7: Claude Code·Codex에 공개 마켓플레이스로 실제 설치 확인(승인). 공개 저장소 https://github.com/cattysue/video-library — push는 `main`만, `private-history`는 절대 올리지 않음.
+2. 단추 축소(내 PC 반영 완료)를 버전 1.0.1로 공개할지 사용자 결정 → 공개하면 `main` push + 설치본 업데이트(`claude plugin marketplace update` 등). push는 `main`만, `private-history`는 절대 올리지 않음.
+3. 과제 제출: 체크리스트 ①마켓플레이스(공개 저장소) ②1:1 수업(`docs/ta-guide.md`) ③웹(Railway 주소). 미뤄 둔 사소한 점은 4·5단계 증거 문서 참고.
 
 ## 2. 지켜야 할 것
 - Superpowers 절차: 설계 → 사용자 승인 → 계획 → TDD 구현 → 검토 → 검증.
@@ -51,3 +53,5 @@
 | 10-06 | Claude | 스킬 사용: `번역 <영상 C(의학)>`(한국어 의학 강의 266문장 → 영어). reopen → 조각 2개 병렬 번역(서브에이전트 2개, 약 20만 토큰) → check 통과 → merge → assemble(validate 통과) → Railway 사본 갱신(비공개 상태로 올라감). 전사가 깨진 문장 몇 곳(7·8·13·100·246·254·266 등)은 뜻을 추정해 옮김 | (이 커밋) | 대화 기록 |
 | 10-06 | Claude | 5단계 Task 1~5 + 공개 전 독립 검토(치명 1: 공개 검사 파일에 남의 영상 정보가 조각으로 남음 → 이 PC 전용 목록으로 이동, 중요 3 수정), 공개용 커밋 다시 만듦. 이 표의 커밋 번호는 공개 전 기록(이 PC의 `private-history`) 기준 | (공개 첫 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
 | 10-06 | Claude | GitHub 공개(`cattysue/video-library`, 커밋 1개·noreply·MIT 인식) + Railway 재배포(새 복사 문구 반영, 데모 공개 유지) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 10-06 | Codex | 사용자 요청으로 설치된 `video-library` 스킬 실행, 영상자료실 열기 성공·로컬 HTTP 200 확인 | — | [증거](superpowers/evidence/2026-10-06-codex-library-open.md) |
+| 10-06 | Claude | 5단계 완료: 공개 마켓플레이스 설치(Claude Code·Codex) 확인, 사용자가 두 도구 새 대화에서 영상자료실 열림 확인. 사용자 요청으로 단추 한 단계 축소(내 PC 반영) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
