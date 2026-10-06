@@ -43,3 +43,10 @@
 | 공개 저장소 | `gh repo create cattysue/video-library --public --source . --push` → https://github.com/cattysue/video-library ✓ / 공개 상태 PUBLIC, 기본 브랜치 `main`, 원격 브랜치는 `main` 하나, 커밋 1개(작성자·커미터 noreply) ✓ / GitHub가 라이선스를 MIT로 인식 ✓ / 저장소 첫 화면에 README·폴더 구성 표시 ✓ |
 | Railway 재배포 | `railway up --service video-library --detach` → 약 36초 뒤 새 화면 파일(복사 문구 `video-library 번역 <ID>`) 반영 ✓ / `/api/health` 정상, 공개 목록은 데모 1편(공개) 그대로 ✓(볼륨 유지) |
 
+## 실제 설치 확인 (Task 7, 사용자 승인)
+| 도구 | 명령·결과 |
+|---|---|
+| Claude Code 2.1.278 | `claude plugin marketplace add cattysue/video-library` → "Successfully added marketplace: video-library" ✓ / `claude plugin install video-library@video-library` → "Successfully installed plugin (scope: user)" ✓ / `claude plugin list` → enabled, 1.0.0 ✓ / `claude plugin details video-library` → 스킬 1개(video-library), 설명 표시 ✓ |
+| Codex 0.155.1 | `codex plugin marketplace add cattysue/video-library` → GitHub에서 받아 추가 ✓ / `codex plugin add video-library@video-library` → 설치 ✓ / `codex plugin list` → "installed, enabled 1.0.0" ✓ / 설치 폴더에 `skills/video-library/SKILL.md`(설명문 정상)·`scripts`·`web` ✓ |
+| 새 대화에서 "영상자료실 열어줘" | 사용자 확인 대기 |
+
