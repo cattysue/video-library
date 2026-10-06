@@ -36,3 +36,10 @@
 
 ## 참고
 - 이 대화 밖의 세션이 같은 폴더에서 의학 강의(영상 C) 영어 번역을 실행하고 Railway에 **비공개**로 올렸다(인계 문서 기록). 비공개라 손님 화면에는 보이지 않는다.
+
+## GitHub 공개·Railway 재배포 (Task 6, 사용자 승인)
+| 단계 | 결과 |
+|---|---|
+| 공개 저장소 | `gh repo create cattysue/video-library --public --source . --push` → https://github.com/cattysue/video-library ✓ / 공개 상태 PUBLIC, 기본 브랜치 `main`, 원격 브랜치는 `main` 하나, 커밋 1개(작성자·커미터 noreply) ✓ / GitHub가 라이선스를 MIT로 인식 ✓ / 저장소 첫 화면에 README·폴더 구성 표시 ✓ |
+| Railway 재배포 | `railway up --service video-library --detach` → 약 36초 뒤 새 화면 파일(복사 문구 `video-library 번역 <ID>`) 반영 ✓ / `/api/health` 정상, 공개 목록은 데모 1편(공개) 그대로 ✓(볼륨 유지) |
+

@@ -15,7 +15,7 @@
 
 **다음에 할 일:**
 1. 하루 뒤 Railway 사용액 확인.
-2. 5단계 Task 6(GitHub 공개 `cattysue/video-library` — `main`만 push, `private-history`는 절대 올리지 않음) → Railway 재배포 → Task 7(Claude Code·Codex 실제 설치 확인). 단계마다 승인.
+2. 5단계 Task 7: Claude Code·Codex에 공개 마켓플레이스로 실제 설치 확인(승인). 공개 저장소 https://github.com/cattysue/video-library — push는 `main`만, `private-history`는 절대 올리지 않음.
 
 ## 2. 지켜야 할 것
 - Superpowers 절차: 설계 → 사용자 승인 → 계획 → TDD 구현 → 검토 → 검증.
@@ -50,3 +50,4 @@
 | 10-06 | Claude | 5단계 준비: Claude Code·Codex 공식 플러그인 형식 확인, 공개 전 점검(커밋 작성자 개인 이메일 68개, 문서 속 PC 경로·다른 분 영상 정보), 사용자 결정 4건, 계획 작성 | (이 커밋) | [계획](superpowers/plans/2026-10-06-stage5-marketplace.md) |
 | 10-06 | Claude | 스킬 사용: `번역 <영상 C(의학)>`(한국어 의학 강의 266문장 → 영어). reopen → 조각 2개 병렬 번역(서브에이전트 2개, 약 20만 토큰) → check 통과 → merge → assemble(validate 통과) → Railway 사본 갱신(비공개 상태로 올라감). 전사가 깨진 문장 몇 곳(7·8·13·100·246·254·266 등)은 뜻을 추정해 옮김 | (이 커밋) | 대화 기록 |
 | 10-06 | Claude | 5단계 Task 1~5 + 공개 전 독립 검토(치명 1: 공개 검사 파일에 남의 영상 정보가 조각으로 남음 → 이 PC 전용 목록으로 이동, 중요 3 수정), 공개용 커밋 다시 만듦. 이 표의 커밋 번호는 공개 전 기록(이 PC의 `private-history`) 기준 | (공개 첫 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 10-06 | Claude | GitHub 공개(`cattysue/video-library`, 커밋 1개·noreply·MIT 인식) + Railway 재배포(새 복사 문구 반영, 데모 공개 유지) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
