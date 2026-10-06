@@ -1,0 +1,7 @@
+{"wireMagic": "pb3", "events": [
+  {"tStartMs": 0, "dDurationMs": 4000, "id": 1, "wpWinPosId": 1, "wsWinStyleId": 1},
+  {"tStartMs": 500, "dDurationMs": 3500, "wWinId": 1, "segs": [{"utf8": "안녕하세요", "acAsrConf": 0}, {"utf8": " 오늘은", "tOffsetMs": 800}, {"utf8": " 깃을", "tOffsetMs": 1500}, {"utf8": " 배워요", "tOffsetMs": 2100}]},
+  {"tStartMs": 4000, "dDurationMs": 100, "wWinId": 1, "aAppend": 1, "segs": [{"utf8": "\n"}]},
+  {"tStartMs": 5500, "dDurationMs": 3000, "wWinId": 1, "segs": [{"utf8": "[음악]"}]},
+  {"tStartMs": 9000, "dDurationMs": 2500, "wWinId": 1, "segs": [{"utf8": "기"}, {"utf8": " 허브를", "tOffsetMs": 400}, {"utf8": " 씁니다", "tOffsetMs": 900}]}
+]}

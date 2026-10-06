@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "lecture": {
+    "id": "AbCdEfGhIjK",
+    "video_id": "AbCdEfGhIjK",
+    "source_url": "https://www.youtube.com/watch?v=AbCdEfGhIjK",
+    "title": "깃 기초 맛보기 (샘플)",
+    "channel": "샘플 채널",
+    "duration": 480.0,
+    "thumbnail_url": "https://i.ytimg.com/vi/AbCdEfGhIjK/hqdefault.jpg",
+    "language": "ko",
+    "field": "dev",
+    "one_liner": "깃의 저장소·커밋·브랜치·병합을 8분 안에 훑는 입문 강의",
+    "mode": "text",
+    "processed_at": "2026-10-05T14:03:00+09:00",
+    "pipeline": {"version": "0.1.0", "caption_kind": "auto", "skipped": []}
+  },
+  "segments": [
+    {"idx": 1, "start": 0.0, "end": 35.0, "text": "안녕하세요. 오늘은 깃의 기본 개념을 짧게 살펴보겠습니다.", "raw": "안녕하세요 오늘은 깃의 기본 개념을 짧게 살펴보겠습니다"},
+    {"idx": 2, "start": 35.0, "end": 72.5, "text": "깃은 파일의 변경 이력을 기록하는 도구입니다.", "raw": "깃은 파일의 변경 이력을 기록하는 도구입니다"},
+    {"idx": 3, "start": 72.5, "end": 110.0, "text": "변경 이력을 저장하는 공간을 저장소, 영어로 리포지토리라고 부릅니다.", "raw": "변경 이력을 저장하는 공간을 저장소 영어로 리포지 토리라고 부릅니다"},
+    {"idx": 4, "start": 110.0, "end": 150.0, "text": "작업 내용을 저장소에 기록하는 일을 커밋이라고 합니다.", "raw": "작업 내용을 저장소에 기록하는 일을 커밋 이라고 합니다"},
+    {"idx": 5, "start": 150.0, "end": 190.0, "text": "커밋에는 무엇을 바꿨는지 짧은 메시지를 남깁니다.", "raw": "커밋에는 무엇을 바꿨는지 짧은 메시지를 남깁니다"},
+    {"idx": 6, "start": 190.0, "end": 230.0, "text": "다음으로 브랜치를 알아보겠습니다.", "raw": "다음으로 브랜치를 알아보겠습니다"},
+    {"idx": 7, "start": 230.0, "end": 270.0, "text": "브랜치는 원본을 건드리지 않고 따로 작업하는 갈래입니다.", "raw": "브랜치는 원본을 건드리지 않고 따로 작업하는 갈래입니다"},
+    {"idx": 8, "start": 270.0, "end": 310.0, "text": "작업이 끝나면 브랜치를 원래 줄기에 합치는데, 이것을 병합이라고 합니다.", "raw": "작업이 끝나면 브랜치를 원래 줄기에 합치는데 이것을 병합이라고 합니다"},
+    {"idx": 9, "start": 310.0, "end": 350.0, "text": "온라인 저장소 서비스로는 GitHub가 널리 쓰입니다.", "raw": "온라인 저장소 서비스로는 기 허브가 널리 쓰입니다"},
+    {"idx": 10, "start": 350.0, "end": 390.0, "text": "GitHub 주소는 github.com입니다.", "raw": "기 허브 주소는 github.com 입니다"},
+    {"idx": 11, "start": 390.0, "end": 430.0, "text": "처음에는 git status 명령으로 상태를 확인하는 습관을 들이세요.", "raw": "처음에는 git status 명령으로 상태를 확인하는 습관을 들이세요"},
+    {"idx": 12, "start": 430.0, "end": 478.0, "text": "오늘 내용은 여기까지입니다. 감사합니다.", "raw": "오늘 내용은 여기까지입니다 감사합니다"}
+  ],
+  "translations": {
+    "en": [
+      {"idx": 1, "text": "Hello. Today we will take a quick look at the basic concepts of Git."},
+      {"idx": 2, "text": "Git is a tool that records the change history of files."},
+      {"idx": 3, "text": "The place that stores the change history is called a repository."},
+      {"idx": 4, "text": "Recording your work into the repository is called a commit."},
+      {"idx": 5, "text": "Each commit carries a short message about what you changed."},
+      {"idx": 6, "text": "Next, let's look at branches."},
+      {"idx": 7, "text": "A branch is a separate line of work that leaves the original untouched."},
+      {"idx": 8, "text": "When the work is done, you join the branch back into the main line, which is called a merge."},
+      {"idx": 9, "text": "GitHub is a widely used online repository service."},
+      {"idx": 10, "text": "GitHub's address is github.com."},
+      {"idx": 11, "text": "At first, build the habit of checking the status with the git status command."},
+      {"idx": 12, "text": "That's all for today. Thank you."}
+    ]
+  },
+  "corrections": [
+    {"idx": 9, "from": "기 허브", "to": "GitHub", "kind": "term"},
+    {"idx": 10, "from": "기 허브", "to": "GitHub", "kind": "term"}
+  ],
+  "chapters": [
+    {"id": "1", "title": "깃과 커밋", "summary": "깃이 파일의 변경 이력을 기록하는 도구라고 소개한다. 이력을 저장하는 공간인 저장소와, 작업을 기록하는 커밋을 설명한다. 커밋에는 짧은 메시지를 남긴다고 말한다.",
+     "segments": [1, 5], "start": 0.0, "end": 190.0,
+     "children": [
+       {"id": "1.1", "title": "깃과 저장소", "summary": "깃의 역할과 저장소의 뜻을 설명한다.", "segments": [1, 3], "start": 0.0, "end": 110.0, "children": []},
+       {"id": "1.2", "title": "커밋", "summary": "작업을 기록하는 커밋과 커밋 메시지를 설명한다.", "segments": [4, 5], "start": 110.0, "end": 190.0, "children": []}
+     ]},
+    {"id": "2", "title": "브랜치와 GitHub", "summary": "브랜치를 원본과 따로 작업하는 갈래로 설명하고, 작업 후 합치는 병합을 소개한다. 온라인 저장소 서비스로 GitHub를 언급하고, git status로 상태를 확인하는 습관을 권한다.",
+     "segments": [6, 12], "start": 190.0, "end": 478.0,
+     "children": [
+       {"id": "2.1", "title": "브랜치와 병합", "summary": "브랜치와 병합의 개념을 설명한다.", "segments": [6, 8], "start": 190.0, "end": 310.0, "children": []},
+       {"id": "2.2", "title": "GitHub와 첫 습관", "summary": "GitHub를 소개하고 git status 습관을 권한다.", "segments": [9, 12], "start": 310.0, "end": 478.0, "children": []}
+     ]}
+  ],
+  "mentions": [
+    {"kind": "link", "text": "GitHub", "url": "https://github.com", "idx": 10},
+    {"kind": "command", "text": "git status", "idx": 11}
+  ],
+  "glossary": [
+    {"term": "커밋(Commit)", "definition": "작업한 변경 내용을 저장소에 하나의 기록으로 남기는 일입니다.", "analogy": "문서를 고칠 때마다 날짜와 메모를 붙여 사본을 보관해 두는 것과 비슷합니다.", "idx": 4},
+    {"term": "브랜치(Branch)", "definition": "원본에 영향을 주지 않고 따로 작업할 수 있게 나눈 작업 흐름입니다.", "analogy": "원고를 복사해 초안을 따로 고친 뒤 나중에 원본에 반영하는 것과 비슷합니다.", "idx": 7}
+  ],
+  "faq": [
+    {"question": "깃은 무엇을 하는 도구인가요?", "answer": "파일의 변경 이력을 기록하는 도구라고 설명합니다.", "evidence": [2]},
+    {"question": "저장소(리포지토리)는 무엇인가요?", "answer": "변경 이력을 저장하는 공간입니다.", "evidence": [3]},
+    {"question": "커밋할 때 무엇을 남기나요?", "answer": "무엇을 바꿨는지 짧은 메시지를 남깁니다.", "evidence": [5]},
+    {"question": "브랜치는 왜 쓰나요?", "answer": "원본을 건드리지 않고 따로 작업하기 위해서입니다.", "evidence": [7]},
+    {"question": "처음에 들이면 좋은 습관은 무엇인가요?", "answer": "git status 명령으로 상태를 확인하는 습관입니다.", "evidence": [11]}
+  ]
+}

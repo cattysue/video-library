@@ -1,0 +1,20 @@
+{
+  "name": "video-library",
+  "interface": {
+    "displayName": "video-library (영상자료실)"
+  },
+  "plugins": [
+    {
+      "name": "video-library",
+      "source": {
+        "source": "local",
+        "path": "./plugin/video-library"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

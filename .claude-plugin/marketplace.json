@@ -1,0 +1,15 @@
+{
+  "name": "video-library",
+  "description": "유튜브 강의를 교정·정리해 내 PC의 영상자료실에 쌓는 플러그인",
+  "owner": {
+    "name": "cattysue",
+    "url": "https://github.com/cattysue"
+  },
+  "plugins": [
+    {
+      "name": "video-library",
+      "source": "./plugin/video-library",
+      "description": "유튜브 링크 하나로 자막 오전사 교정·교열, 목차·요약·용어집·FAQ·번역을 만들어 영상자료실(내 PC)에 쌓고 화면으로 본다"
+    }
+  ]
+}

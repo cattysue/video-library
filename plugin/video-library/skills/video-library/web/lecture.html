@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>강의 — 영상자료실</title>
+<link rel="stylesheet" href="/app/app.css">
+</head>
+<body class="page-lecture">
+<header class="topbar">
+  <a href="/" class="back">← 목록</a>
+  <h1 id="title" class="lecture-title">불러오는 중…</h1>
+  <span id="badges" class="badges"></span>
+  <input id="find" type="search" placeholder="이 강의에서 검색" autocomplete="off" aria-label="이 강의에서 검색">
+</header>
+<main class="lecture-layout">
+  <section class="left">
+    <div class="panel player-box">
+      <div class="player-wrap"><div id="player"></div></div>
+      <div id="ticks" class="ticks" title="눌러서 이동"></div>
+      <div class="controls">
+        <span id="clock" class="clock">0:00:00 / 0:00:00</span>
+        <span class="muted">배속</span>
+        <span id="speeds" class="speeds"></span>
+      </div>
+      <p class="shortcuts">단축키 J/K/L 10초 뒤·재생/정지·10초 앞 · ←/→ 5초 · 1~9 대목차</p>
+    </div>
+    <div class="panel transcript-box">
+      <div class="box-head">
+        <h2>전사</h2>
+        <span id="lang-switch" class="seg" hidden></span>
+        <button id="copy-plain" class="btn small" type="button">텍스트만 복사</button>
+        <button id="copy-timed" class="btn small" type="button">시간 포함 복사</button>
+        <span id="count" class="muted"></span>
+      </div>
+      <ol id="transcript" class="transcript"></ol>
+      <div class="actions">
+        <button id="ask" class="btn" type="button">이 강의에 질문하기</button>
+        <button id="request-en" class="btn" type="button" hidden>영어 번역 요청</button>
+      </div>
+    </div>
+  </section>
+  <aside class="panel right">
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" data-tab="toc" aria-selected="true">목차</button>
+      <button type="button" role="tab" data-tab="notes" aria-selected="false">노트</button>
+      <button type="button" role="tab" data-tab="glossary" aria-selected="false">용어집</button>
+      <button type="button" role="tab" data-tab="faq" aria-selected="false">FAQ</button>
+    </div>
+    <div id="tab-toc" class="tab-panel" role="tabpanel"></div>
+    <div id="tab-notes" class="tab-panel note" role="tabpanel" hidden></div>
+    <div id="tab-glossary" class="tab-panel" role="tabpanel" hidden>
+      <input id="glossary-find" class="panel-search" type="search" placeholder="용어 검색" autocomplete="off" aria-label="용어 검색">
+      <div id="glossary-list"></div>
+    </div>
+    <div id="tab-faq" class="tab-panel" role="tabpanel" hidden></div>
+  </aside>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app/common.js"></script>
+<script src="/app/lecture.js"></script>
+</body>
+</html>

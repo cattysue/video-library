@@ -1,0 +1,5 @@
+{"events": [
+  {"tStartMs": 1000, "dDurationMs": 2000, "segs": [{"utf8": "Hello everyone."}]},
+  {"tStartMs": 3000, "dDurationMs": 2500, "segs": [{"utf8": "Today we talk\nabout quantum"}]},
+  {"tStartMs": 5500, "dDurationMs": 2000, "segs": [{"utf8": "entanglement."}]}
+]}

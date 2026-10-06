@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:video-library:lecture.schema.json",
+  "title": "lecture.json",
+  "description": "video-library 플러그인과 뷰어 서버(PC·Railway)의 약속. 시간은 초(number). 의미 규칙(번호 연속, 목차 덮기, 번역 1:1, 교열 내용 불변 등)은 validate.py 가 추가로 검사한다. $defs 의 context·editItem·outline 은 AI 단계 결과물 형식이다.",
+  "type": "object",
+  "required": ["schema_version", "lecture", "segments", "translations", "corrections", "chapters", "mentions", "glossary", "faq"],
+  "properties": {
+    "schema_version": {"enum": ["1.0"]},
+    "lecture": {"$ref": "#/$defs/lecture"},
+    "segments": {"type": "array", "items": {"$ref": "#/$defs/segment"}},
+    "translations": {"type": "object", "additionalProperties": {"type": "array", "items": {"$ref": "#/$defs/translationItem"}}},
+    "corrections": {"type": "array", "items": {"$ref": "#/$defs/correction"}},
+    "chapters": {"type": "array", "items": {"$ref": "#/$defs/chapter"}},
+    "mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}},
+    "glossary": {"type": "array", "items": {"$ref": "#/$defs/glossaryItem"}},
+    "faq": {"type": "array", "items": {"$ref": "#/$defs/faqItem"}}
+  },
+  "$defs": {
+    "videoId": {"type": "string", "pattern": "^[A-Za-z0-9_-]{11}$"},
+    "field": {"enum": ["dev", "finance", "science", "medical", "other"]},
+    "lecture": {
+      "type": "object",
+      "required": ["id", "video_id", "source_url", "title", "channel", "duration", "thumbnail_url", "language", "field", "one_liner", "mode", "processed_at", "pipeline"],
+      "properties": {
+        "id": {"$ref": "#/$defs/videoId"},
+        "video_id": {"$ref": "#/$defs/videoId"},
+        "source_url": {"type": "string", "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$"},
+        "title": {"type": "string", "minLength": 1},
+        "channel": {"type": "string"},
+        "duration": {"type": "number", "minimum": 1},
+        "thumbnail_url": {"type": "string", "pattern": "^https://"},
+        "language": {"type": "string", "pattern": "^[a-z]{2}$"},
+        "field": {"$ref": "#/$defs/field"},
+        "one_liner": {"type": "string", "minLength": 1, "maxLength": 80},
+        "mode": {"enum": ["text"]},
+        "processed_at": {"type": "string", "minLength": 1},
+        "pipeline": {
+          "type": "object",
+          "required": ["version", "caption_kind", "skipped"],
+          "properties": {
+            "version": {"type": "string", "minLength": 1},
+            "caption_kind": {"enum": ["manual", "auto"]},
+            "skipped": {"type": "array", "items": {"enum": ["glossary", "translate", "faq"]}}
+          }
+        }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "required": ["idx", "start", "end", "text", "raw"],
+      "properties": {
+        "idx": {"type": "integer", "minimum": 1},
+        "start": {"type": "number", "minimum": 0},
+        "end": {"type": "number", "minimum": 0},
+        "text": {"type": "string", "minLength": 1},
+        "raw": {"type": "string"}
+      }
+    },
+    "translationItem": {
+      "type": "object",
+      "required": ["idx", "text"],
+      "properties": {
+        "idx": {"type": "integer", "minimum": 1},
+        "text": {"type": "string", "minLength": 1}
+      }
+    },
+    "change": {
+      "type": "object",
+      "required": ["from", "to", "kind"],
+      "properties": {
+        "from": {"type": "string", "minLength": 1, "maxLength": 20},
+        "to": {"type": "string", "minLength": 1, "maxLength": 20},
+        "kind": {"enum": ["term", "spelling"]}
+      }
+    },
+    "correction": {
+      "type": "object",
+      "required": ["idx", "from", "to", "kind"],
+      "properties": {
+        "idx": {"type": "integer", "minimum": 1},
+        "from": {"type": "string", "minLength": 1, "maxLength": 20},
+        "to": {"type": "string", "minLength": 1, "maxLength": 20},
+        "kind": {"enum": ["term", "spelling"]}
+      }
+    },
+    "chapter": {
+      "type": "object",
+      "required": ["id", "title", "summary", "segments", "children"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[0-9]+(\\.[0-9]+)?$"},
+        "title": {"type": "string", "minLength": 1, "maxLength": 30},
+        "summary": {"type": "string", "minLength": 1},
+        "segments": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "integer", "minimum": 1}},
+        "start": {"type": "number", "minimum": 0},
+        "end": {"type": "number", "minimum": 0},
+        "children": {"type": "array", "items": {"$ref": "#/$defs/chapter"}}
+      }
+    },
+    "mention": {
+      "type": "object",
+      "required": ["kind", "text", "idx"],
+      "properties": {
+        "kind": {"enum": ["link", "book", "command", "other"]},
+        "text": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "pattern": "^https?://"},
+        "idx": {"type": "integer", "minimum": 1}
+      }
+    },
+    "glossaryItem": {
+      "type": "object",
+      "required": ["term", "definition", "idx"],
+      "properties": {
+        "term": {"type": "string", "minLength": 1},
+        "definition": {"type": "string", "minLength": 1},
+        "analogy": {"type": "string", "minLength": 1},
+        "claim_note": {"type": "string", "minLength": 1},
+        "idx": {"type": "integer", "minimum": 1}
+      }
+    },
+    "faqItem": {
+      "type": "object",
+      "required": ["question", "answer", "evidence"],
+      "properties": {
+        "question": {"type": "string", "minLength": 1},
+        "answer": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "minItems": 1, "items": {"type": "integer", "minimum": 1}}
+      }
+    },
+    "editItem": {
+      "type": "object",
+      "required": ["idx", "text", "changes"],
+      "properties": {
+        "idx": {"type": "integer", "minimum": 1},
+        "text": {"type": "string", "minLength": 1},
+        "changes": {"type": "array", "items": {"$ref": "#/$defs/change"}}
+      }
+    },
+    "context": {
+      "type": "object",
+      "required": ["field", "one_liner", "topic_summary", "key_terms", "proper_nouns"],
+      "properties": {
+        "field": {"$ref": "#/$defs/field"},
+        "one_liner": {"type": "string", "minLength": 1, "maxLength": 80},
+        "topic_summary": {"type": "string", "minLength": 1},
+        "key_terms": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["term", "heard_as"],
+            "properties": {
+              "term": {"type": "string", "minLength": 1},
+              "heard_as": {"type": "array", "items": {"type": "string", "minLength": 1}},
+              "note": {"type": "string"}
+            }
+          }
+        },
+        "proper_nouns": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "outline": {
+      "type": "object",
+      "required": ["chapters", "mentions"],
+      "properties": {
+        "chapters": {"type": "array", "items": {"$ref": "#/$defs/chapter"}},
+        "mentions": {"type": "array", "items": {"$ref": "#/$defs/mention"}}
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>영상자료실</title>
+<link rel="stylesheet" href="/app/app.css">
+</head>
+<body class="page-library">
+<header class="topbar">
+  <h1 class="brand">영상자료실</h1>
+  <input id="search" type="search" placeholder="모든 강의에서 검색" autocomplete="off" aria-label="모든 강의에서 검색">
+  <button id="admin-btn" class="btn small ghost" type="button" hidden>관리자</button>
+  <form id="login" class="login" hidden>
+    <input id="password" type="password" autocomplete="current-password" placeholder="관리자 비밀번호" aria-label="관리자 비밀번호" required>
+    <button class="btn small" type="submit">로그인</button>
+  </form>
+</header>
+<main class="container">
+  <nav id="filters" class="chips" aria-label="분야 필터"></nav>
+  <section id="jobs" aria-live="polite"></section>
+  <section id="results" hidden></section>
+  <section id="list"></section>
+  <p id="empty" class="empty" hidden>아직 강의가 없습니다. Claude Code에서는 <code>/video-library:video-library &lt;유튜브 링크&gt;</code>, Codex에서는 <code>$video-library &lt;유튜브 링크&gt;</code>를 입력하거나, 대화창에 “video-library로 이 영상 정리해줘 &lt;링크&gt;”라고 쓰세요.</p>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+<script src="/app/common.js"></script>
+<script src="/app/library.js"></script>
+</body>
+</html>
