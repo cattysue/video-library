@@ -16,7 +16,7 @@
 
 **다음에 할 일:**
 1. 하루 뒤 Railway 사용액 확인.
-2. 단추 축소(내 PC 반영 완료)를 버전 1.0.1로 공개할지 사용자 결정 → 공개하면 `main` push + 설치본 업데이트(`claude plugin marketplace update` 등). push는 `main`만, `private-history`는 절대 올리지 않음.
+2. 수정 배포 방법: 버전 올리기(두 `plugin.json`) → 테스트 → `main`만 push(`private-history` 절대 금지) → 설치본 `claude plugin marketplace update video-library` + `claude plugin update video-library@video-library`, Codex `codex plugin marketplace upgrade video-library` + `codex plugin add video-library@video-library` → Railway `railway up`.
 3. 과제 제출: 체크리스트 ①마켓플레이스(공개 저장소) ②1:1 수업(`docs/ta-guide.md`) ③웹(Railway 주소). 미뤄 둔 사소한 점은 4·5단계 증거 문서 참고.
 
 ## 2. 지켜야 할 것
@@ -55,3 +55,4 @@
 | 10-06 | Claude | GitHub 공개(`cattysue/video-library`, 커밋 1개·noreply·MIT 인식) + Railway 재배포(새 복사 문구 반영, 데모 공개 유지) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
 | 10-06 | Codex | 사용자 요청으로 설치된 `video-library` 스킬 실행, 영상자료실 열기 성공·로컬 HTTP 200 확인 | — | [증거](superpowers/evidence/2026-10-06-codex-library-open.md) |
 | 10-06 | Claude | 5단계 완료: 공개 마켓플레이스 설치(Claude Code·Codex) 확인, 사용자가 두 도구 새 대화에서 영상자료실 열림 확인. 사용자 요청으로 단추 한 단계 축소(내 PC 반영) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 10-07 | Claude | 1.0.1 배포(작은 단추): 공개 저장소·Claude Code·Codex 설치본·Railway 모두 반영 | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |

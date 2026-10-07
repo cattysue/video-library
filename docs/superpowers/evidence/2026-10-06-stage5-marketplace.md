@@ -52,3 +52,11 @@
 
 ## 설치 뒤 사용자 요청
 - 조약돌 단추 한 단계 더 작게(글자 13px, 여백 4px 12px, [보기] 5px 15px, 단추 사이 8px) → 테스트 `test_pebbles_are_compact`, 전체 415개 통과, 내 PC 영상자료실 화면에 반영·스크린샷 확인 ✓. 사용자 승인(10-07)으로 버전 **1.0.1** 배포 — 아래 표.
+
+| 1.0.1 배포 (10-07, 사용자 승인) | 결과 |
+|---|---|
+| 공개 저장소 | 매니페스트 2개 버전 1.0.1, 테스트 415개·`claude plugin validate` 통과, `main`만 push(작성자 noreply) ✓ |
+| Claude Code 설치본 | `claude plugin marketplace update video-library` → `claude plugin update video-library@video-library` → "1.0.0 → 1.0.1" ✓(다음 세션부터 적용) |
+| Codex 설치본 | `codex plugin marketplace upgrade video-library` → `codex plugin add video-library@video-library` → 1.0.1 ✓ |
+| Railway | `railway up` → 약 30초 뒤 새 CSS 반영, 데모 공개 유지 ✓ |
+
