@@ -8,6 +8,7 @@ from .config import VIDEO_ID_RE, lecture_dir, now_kst, read_json
 from .library import index_entry
 
 JOB_RECENT_SEC = 3600
+JOB_STALE_SEC = 6 * 3600  # 이만큼 갱신이 없으면 멈춘 작업으로 보고 숨긴다
 
 
 class FileStore:
@@ -32,7 +33,7 @@ class FileStore:
         return sorted(items, key=lambda e: str(e.get("processed_at", "")), reverse=True)
 
     def get_lecture(self, lecture_id) -> dict | None:
-        if not isinstance(lecture_id, str) or not VIDEO_ID_RE.match(lecture_id):
+        if not isinstance(lecture_id, str) or not VIDEO_ID_RE.fullmatch(lecture_id):
             return None
         try:
             doc = read_json(lecture_dir(self.home, lecture_id) / "lecture.json")
@@ -58,14 +59,13 @@ class FileStore:
                 continue
             if not isinstance(job, dict):
                 continue
-            if job.get("status") == "running":
-                jobs.append(job)
-                continue
             try:
                 updated = datetime.fromisoformat(job["updated_at"])
+                age = (now - updated).total_seconds()
             except (KeyError, TypeError, ValueError):
                 continue
-            if (now - updated).total_seconds() <= JOB_RECENT_SEC:
+            limit = JOB_STALE_SEC if job.get("status") == "running" else JOB_RECENT_SEC
+            if age <= limit:
                 jobs.append(job)
         return sorted(jobs, key=lambda j: str(j.get("updated_at", "")), reverse=True)
 

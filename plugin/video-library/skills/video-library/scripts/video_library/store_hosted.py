@@ -34,7 +34,7 @@ def _aware(value) -> bool:
 
 
 def check_job(job_id, job) -> list[str]:
-    if not isinstance(job_id, str) or not JOB_ID_RE.match(job_id):
+    if not isinstance(job_id, str) or not JOB_ID_RE.fullmatch(job_id):
         return ["job_id 형식이 올바르지 않습니다"]
     if not isinstance(job, dict):
         return ["진행 기록은 객체여야 합니다"]
@@ -44,7 +44,7 @@ def check_job(job_id, job) -> list[str]:
     if job.get("job_id") != job_id:
         errors.append("job_id 가 주소와 다릅니다")
     lid = job.get("lecture_id")
-    if not isinstance(lid, str) or not VIDEO_ID_RE.match(lid) or not job_id.startswith(lid + "-"):
+    if not isinstance(lid, str) or not VIDEO_ID_RE.fullmatch(lid) or not job_id.startswith(lid + "-"):
         errors.append("lecture_id 가 올바르지 않습니다")
     if not isinstance(job.get("title"), str) or len(job["title"]) > 300:
         errors.append("title 은 300자 이하 글자")
@@ -77,13 +77,13 @@ class HostedStore(FileStore):
         ids = data.get("public") if isinstance(data, dict) else None
         if not isinstance(ids, list):
             return set()
-        return {i for i in ids if isinstance(i, str) and VIDEO_ID_RE.match(i)}
+        return {i for i in ids if isinstance(i, str) and VIDEO_ID_RE.fullmatch(i)}
 
     def _save_public(self, ids: set[str]) -> None:
         write_json(self.home / VISIBILITY, {"public": sorted(ids)})
 
     def put_lecture(self, lecture_id, doc) -> bool:
-        if not isinstance(lecture_id, str) or not VIDEO_ID_RE.match(lecture_id):
+        if not isinstance(lecture_id, str) or not VIDEO_ID_RE.fullmatch(lecture_id):
             raise UploadError(["주소의 강의 ID 가 올바르지 않습니다"])
         errors = validate_lecture(doc)
         if errors:

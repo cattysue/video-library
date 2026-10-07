@@ -57,7 +57,7 @@ def set_step(home: Path, job_id: str, step: str, status: str, detail: str = "",
         raise StepError(f"알 수 없는 상태: {status}")
     job = load_job(home, job_id)
     job["steps"][step] = status
-    job["detail"] = detail
+    job["detail"] = (detail or "")[:200]
     if status == "failed":
         job["status"] = "failed"
         job["error"] = error or f"{step} 단계 실패"

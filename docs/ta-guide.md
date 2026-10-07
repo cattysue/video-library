@@ -40,4 +40,4 @@
 
 ## 정리
 - 처리한 강의는 그 PC의 `문서/영상자료실`에만 남습니다(다른 사람 서버로 가지 않음).
-- 플러그인 제거: Claude Code `claude plugin uninstall video-library@video-library`, Codex `codex plugin remove video-library@video-library`
+- 플러그인 제거: Claude Code `claude plugin uninstall video-library@video-library` → `claude plugin marketplace remove video-library`, Codex `codex plugin remove video-library@video-library` → `codex plugin marketplace remove video-library`. 제거해도 `문서/영상자료실` 폴더는 남습니다.

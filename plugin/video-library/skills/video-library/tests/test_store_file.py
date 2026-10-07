@@ -50,13 +50,14 @@ def test_empty_library(home):
 
 
 def test_list_jobs_filters_old_finished_jobs(home):
-    job(home, "running-old", "running", NOW - timedelta(days=2))
+    job(home, "running-old", "running", NOW - timedelta(days=2))  # 멈춘 작업(6시간 넘음) → 숨김(10-07 결정)
+    job(home, "running-now", "running", NOW - timedelta(hours=1))
     job(home, "done-recent", "done", NOW - timedelta(minutes=5))
     job(home, "done-old", "done", NOW - timedelta(hours=2))
     job(home, "failed-recent", "failed", NOW - timedelta(minutes=30))
     (home / "jobs" / "broken.json").write_text("{깨짐", encoding="utf-8")
     ids = [j["job_id"] for j in FileStore(home).list_jobs(now=NOW)]
-    assert ids == ["done-recent", "failed-recent", "running-old"]
+    assert ids == ["done-recent", "failed-recent", "running-now"]
 
 
 def test_version_changes_when_index_changes(home):

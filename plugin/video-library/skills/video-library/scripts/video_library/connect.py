@@ -49,7 +49,7 @@ def connect(home, server_url: str, service: str | None = None, ask=getpass.getpa
 def main(argv: list[str]) -> int:
     ap = argparse.ArgumentParser(prog="vl.py connect",
                                  description="내 Railway 서버와 연결한다(사용자가 자기 터미널에서 직접 실행).")
-    ap.add_argument("server", help="Railway 서버 주소(예: https://video-library.up.railway.app)")
+    ap.add_argument("server", help="Railway 서버 주소(예: https://<내 서비스>.up.railway.app)")
     ap.add_argument("--service", default=None, help="Railway 서비스 이름")
     a = ap.parse_args(argv)
     if not sys.stdin.isatty():

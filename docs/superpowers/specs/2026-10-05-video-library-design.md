@@ -84,14 +84,14 @@ plugin-app/
 │  ├─ .codex-plugin/plugin.json            Codex용 플러그인 정보
 │  └─ skills/video-library/
 │     ├─ SKILL.md                          절차서 + AI 브리프
-│     ├─ README.md                         설치·사용 안내(사람용)
 │     ├─ scripts/vl.py                     단일 진입점
 │     ├─ scripts/video_library/            단계별 코드 (아래 표)
 │     ├─ scripts/schema/lecture.schema.json
 │     ├─ web/                              목록·강의 화면
 │     └─ tests/
 ├─ railway/                                Railway 배포 설정(Dockerfile). 서버 코드는 플러그인 scripts/를 그대로 쓴다
-└─ docs/                                   설계서·구현 계획·증거 기록·인계 문서
+├─ README.md · LICENSE                     설치·사용 안내(사람용, 10-07: 저장소 맨 위로 옮김) · MIT
+└─ docs/                                   설계서·구현 계획·증거 기록·인계 문서·1:1 수업 안내서(ta-guide.md)
 ```
 
 바깥 `바코대AX` 저장소는 `.gitignore`로 `plugin-app/`을 무시한다(기존 `aistra-news/app-web/`과 같은 방식).

@@ -15,7 +15,10 @@ def upload(home, video_id: str, cfg: dict) -> dict:
     path = lecture_dir(home, video_id) / "lecture.json"
     if not path.exists():
         raise StepError(f"영상자료실에 이 강의가 없습니다: {video_id}")
-    doc = read_json(path)
+    try:
+        doc = read_json(path)
+    except ValueError as exc:
+        raise StepError(f"영상자료실의 lecture.json 이 깨졌습니다({exc}). 그 강의를 다시 처리한 뒤 올리세요.") from exc
     try:
         status, body = request("PUT", f"{cfg['server']}/api/lectures/{video_id}", cfg["token"], doc,
                                timeout=UPLOAD_TIMEOUT_SEC)
@@ -23,7 +26,8 @@ def upload(home, video_id: str, cfg: dict) -> dict:
         raise StepError(f"Railway 서버에 연결하지 못했습니다({exc}). PC 결과는 그대로 있습니다 — "
                         f"나중에 'vl.py upload --video {video_id}' 로 다시 올리세요.") from exc
     if status != 200:
-        raise StepError(f"업로드 실패({status}): {body.get('error', '')} — PC 결과는 그대로 있습니다.")
+        hint = " 토큰이나 서버를 바꿨다면 사용자가 직접 'vl.py connect' 를 다시 실행하세요." if status == 401 else ""
+        raise StepError(f"업로드 실패({status}): {body.get('error', '')} — PC 결과는 그대로 있습니다.{hint}")
     return {"uploaded": True, "id": video_id, "public": bool(body.get("public")),
             "url": f"{cfg['server']}/lecture?id={video_id}"}
 

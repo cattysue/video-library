@@ -20,7 +20,7 @@
 |---|---|
 | Claude Code 또는 Codex | 플러그인을 실행할 AI 도구 |
 | Python 3.10 이상 | Windows는 `python`, Mac은 `python3`. 없으면 https://www.python.org/downloads/ (Windows는 설치 때 **Add python.exe to PATH** 체크, Mac 기본 python3는 3.9라 python.org 설치 파일 사용) |
-| yt-dlp | `python -m pip install --user -U "yt-dlp[default]"` |
+| yt-dlp | Windows `python -m pip install --user -U "yt-dlp[default]"` / Mac `python3 -m pip install --user -U "yt-dlp[default]"` |
 | Node.js 또는 deno | 유튜브 자막을 받을 때 yt-dlp가 사용 |
 
 처음 실행하면 플러그인이 `doctor`로 환경을 점검하고, 빠진 것이 있으면 설치 명령을 보여 준 뒤 **승인을 받고** 설치합니다.
@@ -60,8 +60,11 @@ Codex 앱에서는 플러그인 목록(`/plugins`)에서도 설치할 수 있습
 화면은 내 PC 전용 미니 서버(`127.0.0.1`)로 열리며, 1시간 동안 쓰지 않으면 스스로 꺼집니다. 꺼진 뒤에는 「영상자료실 열기」를 다시 더블클릭하세요.
 
 ## (선택) 내 Railway 서버로 공개하기
-Railway 계정과 [Railway CLI](https://docs.railway.com/cli)가 필요하고, 사용량만큼 요금이 나옵니다. 이 저장소를 내려받은(`git clone`) 폴더에서:
+Railway 계정과 [Railway CLI](https://docs.railway.com/cli)가 필요하고, 사용량만큼 요금이 나옵니다. 먼저 저장소를 내려받고 Railway에 로그인한 뒤, 그 폴더에서:
 ```bash
+git clone https://github.com/cattysue/video-library
+cd video-library
+railway login
 railway init --name video-library
 railway add --service video-library
 railway volume add --mount-path /data
@@ -70,10 +73,15 @@ railway domain --service video-library
 ```
 Git Bash에서는 `/data`가 Windows 경로로 바뀌지 않게 앞에 `MSYS_NO_PATHCONV=1 `을 붙입니다. 그다음 **PowerShell 또는 Mac 터미널에서 직접** 관리자 비밀번호를 정하고(화면에 보이지 않게 입력), 배포합니다:
 ```bash
-python plugin/video-library/skills/video-library/scripts/vl.py connect https://<내 공개 주소> --service video-library
+python plugin/video-library/skills/video-library/scripts/vl.py connect https://<내 공개 주소> --service video-library   # Mac은 python3
 railway up --service video-library --detach
 ```
 이후 처리하는 강의는 자동으로 올라갑니다(처음에는 비공개). 공개 주소에서 [관리자]로 로그인해 [비공개]를 누르면 공개됩니다. 이미 있는 강의는 `vl.py upload --video <영상ID>`로 올립니다.
+
+## 업데이트·제거
+- 업데이트: Claude Code `claude plugin marketplace update video-library` → `claude plugin update video-library@video-library` / Codex `codex plugin marketplace upgrade video-library` → `codex plugin add video-library@video-library`
+- 제거: Claude Code `claude plugin uninstall video-library@video-library` → `claude plugin marketplace remove video-library` / Codex `codex plugin remove video-library@video-library` → `codex plugin marketplace remove video-library`
+- 플러그인을 지워도 내 PC의 `문서/영상자료실` 폴더는 지워지지 않습니다(강의 자료 보존). 필요 없으면 직접 지우세요.
 
 ## 안전과 저작권
 - 관리자 비밀번호와 업로드 토큰은 AI에게 알려 주지 마세요. `vl.py connect`가 보이지 않게 입력받고, Railway에는 해시만 저장합니다.

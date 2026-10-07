@@ -28,7 +28,7 @@ STATIC_TYPES = {".html": "text/html; charset=utf-8", ".css": "text/css; charset=
 CSP = ("default-src 'self'; script-src 'self' https://www.youtube.com https://s.ytimg.com; "
        "frame-src https://www.youtube.com https://www.youtube-nocookie.com; "
        "img-src 'self' https://i.ytimg.com data:; style-src 'self' 'unsafe-inline'; "
-       "connect-src 'self'; object-src 'none'; base-uri 'none'")
+       "connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'")
 LECTURE_MAX_BYTES = 20 * 1024 * 1024
 SMALL_MAX_BYTES = 64 * 1024
 WRITE_HEADER = ("X-Requested-With", "video-library")

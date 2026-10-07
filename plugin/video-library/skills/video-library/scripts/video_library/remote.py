@@ -24,7 +24,7 @@ class RemoteError(Exception):
 def normalize_server(url: str) -> str:
     url = (url or "").strip().rstrip("/")
     if not _SERVER_RE.match(url):
-        raise StepError("서버 주소는 https:// 로 시작해야 합니다(예: https://video-library.up.railway.app)")
+        raise StepError("서버 주소는 https:// 로 시작해야 합니다(예: https://<내 서비스>.up.railway.app)")
     return url
 
 

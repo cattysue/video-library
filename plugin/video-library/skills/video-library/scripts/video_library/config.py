@@ -67,7 +67,7 @@ def ensure_home(home: Path) -> Path:
 
 def video_id_arg(value: str) -> str:
     """argparse 용: 유튜브 11자 영상 ID만 받는다(영상자료실 밖 경로가 섞이지 않게)."""
-    if not VIDEO_ID_RE.match(value):
+    if not VIDEO_ID_RE.fullmatch(value):
         raise argparse.ArgumentTypeError("영상 ID는 유튜브 11자 ID여야 합니다(예: 40JNj2zjnQc)")
     return value
 
