@@ -56,3 +56,4 @@
 | 10-06 | Codex | 사용자 요청으로 설치된 `video-library` 스킬 실행, 영상자료실 열기 성공·로컬 HTTP 200 확인 | — | [증거](superpowers/evidence/2026-10-06-codex-library-open.md) |
 | 10-06 | Claude | 5단계 완료: 공개 마켓플레이스 설치(Claude Code·Codex) 확인, 사용자가 두 도구 새 대화에서 영상자료실 열림 확인. 사용자 요청으로 단추 한 단계 축소(내 PC 반영) | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
 | 10-07 | Claude | 1.0.1 배포(작은 단추): 공개 저장소·Claude Code·Codex 설치본·Railway 모두 반영 | (이 커밋) | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 10-07 | Claude | 노션 학습 노트에 3강 페이지(3~5단계 정리) 추가, 허브 진행표 갱신 | (이 커밋) | 노션(개인 공간) |
