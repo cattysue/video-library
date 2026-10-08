@@ -119,8 +119,11 @@
           VL.el("span", {}, ...VL.highlight(h.text, data.query)))))))));
   }
 
+  const uploadFailed = (job) => job.status === "done" && !!job.steps && job.steps.upload === "failed";
+
   function visible(job) {
     if (state.dismissed.has(job.job_id)) return false;
+    if (uploadFailed(job)) return true; // 닫을 때까지 남긴다
     if (job.status === "done") return Date.now() - Date.parse(job.updated_at) < DONE_HIDE_MS;
     return true;
   }
@@ -133,7 +136,7 @@
       const s = (job.steps && job.steps[key]) || "pending";
       return VL.el("span", { class: `step ${s}` }, `${STEP_MARKS[s] || "○"} ${STEP_LABELS[key]}`);
     });
-    return VL.el("article", { class: "job" + (job.status === "failed" ? " failed" : "") },
+    return VL.el("article", { class: "job" + (job.status === "failed" ? " failed" : "") + (uploadFailed(job) ? " warn" : "") },
       VL.el("div", { class: "job-head" },
         VL.el("span", { class: "job-title", text: job.title || job.lecture_id }),
         VL.el("span", { class: "job-status", text: status }),
@@ -141,10 +144,12 @@
         VL.el("button", { class: "btn small ghost", type: "button", "aria-label": "진행 카드 닫기",
           onclick: () => { state.dismissed.add(job.job_id); saveDismissed(); pollJobs(); } }, "×")),
       VL.el("div", { class: "steps" }, ...steps),
-      job.status === "failed" ? VL.el("div", { class: "job-error", text: `${job.error || "실패"} — AI 도구 대화창에서 다시 실행하세요.` }) : null);
+      job.status === "failed" ? VL.el("div", { class: "job-error", text: `${job.error || "실패"} — AI 도구 대화창에서 다시 실행하세요.` }) : null,
+      uploadFailed(job) ? VL.el("div", { class: "job-warn", text: `${job.error || "업로드 실패"} — PC에는 저장됐고 업로드만 실패했습니다. 대화창에 "video-library 업로드 ${job.lecture_id}"를 입력하면 다시 올립니다.` }) : null);
   }
 
   async function pollJobs() {
+    if (document.hidden) return; // 숨겨진 탭은 조회하지 않는다(미니 서버가 1시간 뒤 스스로 꺼질 수 있게)
     if (state.hosted && !state.admin) return;
     let jobs = [];
     try { jobs = await VL.api("/api/jobs"); } catch (e) { return; }
@@ -188,6 +193,7 @@
     loadLectures();
     pollJobs();
     setInterval(pollJobs, 2000);
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) pollJobs(); });
     VL.watchServer();
     $("#search").addEventListener("input", onSearchInput);
   }

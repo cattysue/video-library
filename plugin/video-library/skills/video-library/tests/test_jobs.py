@@ -105,3 +105,15 @@ def test_finish_job_waits_for_upload(home):
     done = jobs.finish_job(home, job["job_id"], {"upload": "done"})
     assert done["status"] == "done" and done["steps"]["upload"] == "done"
     assert jobs.pending_upload_job(home, "AbCdEfGhIjK") is None
+
+
+def test_upload_failure_keeps_pc_result_done(home):
+    # 감수 R2: 업로드만 실패하면 작업 전체를 '실패'로 보이지 않는다(PC 저장은 끝남)
+    job = jobs.start_job(home, "AbCdEfGhIjK", "깃 기초", jobs.initial_steps(False, True))
+    jobs.finish_job(home, job["job_id"], {"assemble": "done"})  # 실제 흐름: 조립 완료 → 업로드 대기
+    failed = jobs.set_step(home, job["job_id"], "upload", "failed", error="업로드 실패(401)")
+    assert failed["status"] == "done" and failed["steps"]["upload"] == "failed"
+    assert failed["error"] == "업로드 실패(401)" and "PC 저장 완료" in failed["detail"]
+    assert jobs.pending_upload_job(home, "AbCdEfGhIjK") == job["job_id"]  # 다시 올리기 가능
+    retry = jobs.set_step(home, job["job_id"], "upload", "running")
+    assert retry["error"] is None and retry["status"] == "running"

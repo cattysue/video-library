@@ -58,9 +58,16 @@ def set_step(home: Path, job_id: str, step: str, status: str, detail: str = "",
     job = load_job(home, job_id)
     job["steps"][step] = status
     job["detail"] = (detail or "")[:200]
-    if status == "failed":
+    if status == "failed" and step == "upload" and job["steps"].get("assemble") == "done":
+        job["status"] = "done"  # PC 저장은 끝났고 업로드만 실패 — 전체 실패로 보이지 않게
+        job["error"] = error or "업로드 실패"
+        job["detail"] = "PC 저장 완료 · 업로드 실패"
+    elif status == "failed":
         job["status"] = "failed"
         job["error"] = error or f"{step} 단계 실패"
+    elif step == "upload" and status == "running" and job["status"] == "done":
+        job["status"] = "running"  # 업로드만 다시 시도
+        job["error"] = None
     elif job["status"] == "failed" and status in ("running", "done"):
         job["status"] = "running"  # 실패한 단계부터 다시 실행하는 중
         job["error"] = None

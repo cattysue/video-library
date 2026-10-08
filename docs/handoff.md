@@ -65,3 +65,4 @@
 | 10-08 | Claude | Codex와의 교차 개발·감수를 위한 `AGENTS.md`(공개용 기술 규칙) 추가. 전체 브리핑은 비공개 바깥 저장소 `docs/plugin-app-briefing.md` | (이 커밋) | `AGENTS.md` |
 | 10-08 | Codex | 미공개 2커밋과 현재 구현 감수: 424개 테스트·JS 문법·공식 검사 통과, 기존 중요 1·사소 3 확인. evidence·현재 상태·backlog 갱신, 제품 코드 수정·커밋·외부 배포 없음 | 미커밋 | [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) |
 | 10-08 | Claude | Codex 감수 R1(업로드 생략 작업도 진행 정보 전송) 실패 테스트로 재현 → 수정, 테스트 426개. 미공개 커밋 3개(1.0.2 후보) | (이 커밋) | [감수](superpowers/evidence/2026-10-08-codex-review.md) |
+| 10-08 | Claude | 감수 R2·R3 수정, 1.0.2 공개(R1·R2·R3·사소한 점 정리·AGENTS.md): GitHub `main` push, Claude Code·Codex 설치본 업데이트, Railway 재배포. 사용자 과제 통과(10-07 코칭) | (이 커밋) | [감수](superpowers/evidence/2026-10-08-codex-review.md) |

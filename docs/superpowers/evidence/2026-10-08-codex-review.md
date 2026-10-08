@@ -85,4 +85,6 @@
 - **R1 수정**: 실패 테스트로 먼저 재현(`test_no_report_when_upload_is_skipped` — 업로드 생략 작업의 시작·단계·완료 보고 0회 기대, `test_fetch_no_upload_sends_nothing` — 설정이 있는 PC에서 `fetch(upload=False)` 전송 0회 기대) → 두 테스트 모두 실패 확인(전송 발생) → `remote.report_job`이 업로드 단계가 `skipped`인 작업은 보내지 않게 수정 → 통과. 전체 `426 passed`. API 문서·설계서에 "업로드 대상 작업만 진행 보고" 명시.
 - 업로드 설정이 없는 경우는 기존 `test_report_job_without_config_does_nothing`이 그대로 확인한다. 업로드 대상 작업의 보고는 기존 `test_jobs_report_every_write`로 계속 확인.
 - R2·R3는 감수 판단대로 backlog 높음 유지(사용자 결정 시 수정). R4는 Codex가 처리한 인계 문서 수정을 그대로 반영.
+- **R2·R3 수정(사용자 요청)**: R2 — 실패 테스트 `test_upload_failure_keeps_pc_result_done`(조립 완료 뒤 업로드만 실패하면 작업 상태 done·오류 보존·"PC 저장 완료" 표시, 다시 올리기 가능) → `jobs.set_step` 수정, 화면은 주황 경고 카드(닫을 때까지 유지, "video-library 업로드 <ID>" 안내). R3 — 숨겨진 탭에서는 진행 카드 조회를 하지 않고 탭으로 돌아오면 바로 조회. 정적 테스트 `test_upload_failure_card_and_hidden_tab_polling`. 시험용 자료실 브라우저 확인 ✓. 전체 `428 passed`, `claude plugin validate` 2종 통과.
+- 1.0.2로 공개(사용자 승인 10-08): 아래 handoff 기록.
 

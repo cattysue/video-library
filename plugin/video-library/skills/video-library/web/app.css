@@ -85,6 +85,8 @@ mark { background: var(--mark); color: inherit; border-radius: 3px; }
 .step.failed { background: var(--bad-soft); color: var(--bad); font-weight: 600; }
 .step.skipped { opacity: .45; text-decoration: line-through; }
 .job-error { margin-top: 8px; color: var(--bad); font-size: 14px; }
+.job.warn { border-color: var(--warn); }
+.job-warn { margin-top: 8px; color: var(--warn); font-size: 14px; }
 
 .card { display: grid; grid-template-columns: 176px 1fr auto; align-items: center; gap: 18px;
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);

@@ -110,3 +110,11 @@ def test_pebbles_are_compact():
     block = css.split(".pebble {", 1)[1].split("}", 1)[0]
     assert "padding: 4px 12px" in block and "font-size: 13px" in block
     assert ".pebble.view { width: max-content; padding: 5px 15px; }" in css
+
+
+def test_upload_failure_card_and_hidden_tab_polling():
+    js = read("library.js")
+    # 감수 R2: 업로드만 실패한 카드는 PC 저장 완료를 알리고 닫을 때까지 남는다
+    assert "PC에는 저장됐고 업로드만 실패했습니다" in js and "uploadFailed(job)" in js
+    # 감수 R3: 숨겨진 탭에서는 조회하지 않아 미니 서버가 스스로 꺼질 수 있다
+    assert "if (document.hidden) return;" in js and '"visibilitychange"' in js
