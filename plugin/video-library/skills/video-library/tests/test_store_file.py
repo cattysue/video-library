@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timedelta
 
 from conftest import VIDEO_ID
@@ -67,3 +68,13 @@ def test_version_changes_when_index_changes(home):
     first = store.version()
     publish(home, "ZzZzZzZzZzZ", "2026-10-06T09:00:00+09:00")
     assert store.version() != first
+
+
+def test_upload_failed_job_stays_listed_until_dismissed(home):
+    # 재감수 N2: 업로드 실패 경고는 1시간이 지나도 목록에 남는다(화면에서 닫을 때까지)
+    j = job(home, "upload-failed-old", "done", NOW - timedelta(hours=5))
+    path = home / "jobs" / "upload-failed-old.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["steps"]["upload"] = "failed"
+    path.write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+    assert [x["job_id"] for x in FileStore(home).list_jobs(now=NOW)] == ["upload-failed-old"]

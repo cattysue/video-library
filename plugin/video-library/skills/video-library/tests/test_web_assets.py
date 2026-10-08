@@ -118,3 +118,27 @@ def test_upload_failure_card_and_hidden_tab_polling():
     assert "PC에는 저장됐고 업로드만 실패했습니다" in js and "uploadFailed(job)" in js
     # 감수 R3: 숨겨진 탭에서는 조회하지 않아 미니 서버가 스스로 꺼질 수 있다
     assert "if (document.hidden) return;" in js and '"visibilitychange"' in js
+
+
+HARNESS = Path(__file__).resolve().parent / "js" / "library_harness.js"
+
+
+def run_harness(*args):
+    proc = subprocess.run(["node", str(HARNESS), *args], capture_output=True, text=True, encoding="utf-8", timeout=30)
+    assert proc.returncode == 0, proc.stderr
+    import json
+    return json.loads(proc.stdout.strip().splitlines()[-1])
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="node 없음")
+def test_returning_to_hidden_tab_shows_lectures_finished_meanwhile():
+    # 재감수 N1: 숨긴 동안 시작·완료된 강의도 탭으로 돌아오면 목록에 보인다(숨긴 동안은 요청 0회)
+    out = run_harness("lectures-after-hidden")
+    assert out == {"hiddenCalls": 0, "cards": 1}
+
+
+@pytest.mark.skipif(shutil.which("node") is None, reason="node 없음")
+def test_view_link_only_when_lecture_exists():
+    # 재감수 N3: Railway 에서 업로드 실패 카드의 [보기]는 서버에 강의가 있을 때만. PC 는 항상 있음
+    assert run_harness("view-link", "hosted") == {"hasView": False, "cards": 1}
+    assert run_harness("view-link", "pc") == {"hasView": True, "cards": 1}

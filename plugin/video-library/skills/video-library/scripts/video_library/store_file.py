@@ -64,6 +64,9 @@ class FileStore:
                 age = (now - updated).total_seconds()
             except (KeyError, TypeError, ValueError):
                 continue
+            if job.get("status") == "done" and (job.get("steps") or {}).get("upload") == "failed":
+                jobs.append(job)  # 업로드 실패 경고는 닫을 때까지 남긴다(재감수 N2)
+                continue
             limit = JOB_STALE_SEC if job.get("status") == "running" else JOB_RECENT_SEC
             if age <= limit:
                 jobs.append(job)

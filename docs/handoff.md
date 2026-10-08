@@ -13,14 +13,15 @@
 | 3단계 화면 + PC 서버 | 완료 — store_file·search·server·opener, 목록·강의 화면, `vl.py open/serve/search`, 실제 영상 4편(개발·과학 EN→KO·금융·의학) 화면 확인 (`main`에 합침), 최종 검토 중요 5건 수정, 분야 단추·[보기] 조약돌 디자인, 테스트 307개 | [증거](superpowers/evidence/2026-10-06-stage3-viewer.md), [API](api.md) |
 | 4단계 Railway | 완료 — 공개 서버 모드·로그인·업로드·connect, 최종 검토 수정, Railway 배포(`https://video-library-production-8b85.up.railway.app`, 데모 1편 공개), 테스트 396개 (`main`에 합침) | [계획](superpowers/plans/2026-10-06-stage4-railway.md) |
 | 5단계 마켓플레이스 | 완료 — 공개 저장소 https://github.com/cattysue/video-library (MIT), Claude Code·Codex 마켓플레이스 설치 확인(새 대화에서 영상자료실 열림), README·1:1 수업 안내서, Railway 재배포 | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
-| 미공개 변경 | `6226c56`(오류 처리·README·backlog 보완), `0351a52`(AGENTS.md) — 감수 시작 시 로컬 추적 `origin/main`보다 2커밋 앞섬. 매니페스트 2개는 아직 1.0.1 | `git log origin/main..HEAD` |
-| 10-08 Codex 감수 | 전체 424개·JS 문법·공식 매니페스트 검사 통과. 치명 미발견, 중요 1(`--no-upload`에도 진행 정보 전송)·사소 3 확인. 제품 코드 수정 없음 | [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) |
+| 1.0.2 공개 | `719efe8`에서 R1 수정, `2dedb27`에서 R2·R3 수정과 1.0.2 공개. GitHub·양쪽 도구 설치본·Railway 반영은 사용자 설명과 기존 기록 기준이며 이번 운영 재확인은 없음 | [이전 감수와 처리 기록](superpowers/evidence/2026-10-08-codex-review.md) |
+| 최신 Git 상태 | 재감수 시작 HEAD는 `edce55f`(handoff 기록 추가). 로컬 추적 `origin/main`의 `2dedb27`보다 문서 커밋 1개 앞섬. 원격 재조회 없음 | `git log --oneline -10` |
+| 10-08 Codex 재감수 | 428개 테스트·JS 문법·공식 검사 통과. R1 해소, R2 재시도와 `check_job` 호환 확인. 중요 N1(배경 탭에서 완료된 강의의 목록 갱신 누락), 사소 N2·N3 확인 | [재감수 증거](superpowers/evidence/2026-10-08-codex-rereview.md) |
 
 **다음에 할 일:**
-1. 공개 전 중요 R1 수정 권장: `--no-upload` 작업은 진행 보고도 서버에 보내지 않게 실패 테스트부터 추가. [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) 참고.
-2. 미공개 2커밋과 수정분의 다음 버전 공개 여부는 사용자 결정 대기. Railway 실사용액은 아직 미확인.
+1. 중요 N1 수정 권장: 숨긴 동안 시작·완료된 강의도 탭 복귀 시 목록에 보이도록 강의 목록 갱신을 추가. 동작 테스트부터 재현한다. [재감수 증거](superpowers/evidence/2026-10-08-codex-rereview.md) 참고.
+2. 사소 N2(업로드 경고 1시간 뒤 사라짐)·N3(Railway 최초 업로드 실패 카드의 보기 링크)를 보완한다. Railway 실사용액은 아직 미확인.
 3. 수정 배포 방법(단계마다 승인): 버전 올리기(두 `plugin.json`·테스트 기대값) → 테스트·공식 검사 → `main`만 push(`private-history` 절대 금지) → 설치본 `claude plugin marketplace update video-library` + `claude plugin update video-library@video-library`, Codex `codex plugin marketplace upgrade video-library` + `codex plugin add video-library@video-library` → Railway `railway up`.
-4. 과제 제출: ①마켓플레이스·③웹은 기존 evidence상 완료, ②1:1 수업은 안내서(`docs/ta-guide.md`) 준비·실제 수업 대기. 남은 사소한 점은 `docs/backlog.md` 참고. 이번 검토는 로컬 기준이며 운영·설치본을 새로 확인하지 않았다.
+4. 과제는 기존 10-08 진행 기록상 10-07 코칭에서 통과. 안내서(`docs/ta-guide.md`)와 남은 일(`docs/backlog.md`)을 유지한다. 이번 검토는 로컬 기준이며 운영·설치본을 새로 확인하지 않았다.
 
 ## 2. 지켜야 할 것
 - Superpowers 절차: 설계 → 사용자 승인 → 계획 → TDD 구현 → 검토 → 검증.
@@ -67,3 +68,5 @@
 | 10-08 | Claude | Codex 감수 R1(업로드 생략 작업도 진행 정보 전송) 실패 테스트로 재현 → 수정, 테스트 426개. 미공개 커밋 3개(1.0.2 후보) | (이 커밋) | [감수](superpowers/evidence/2026-10-08-codex-review.md) |
 | 10-08 | Claude | 감수 R2·R3 수정, 1.0.2 공개(R1·R2·R3·사소한 점 정리·AGENTS.md): GitHub `main` push, Claude Code·Codex 설치본 업데이트, Railway 재배포. 사용자 과제 통과(10-07 코칭) | (이 커밋) | [감수](superpowers/evidence/2026-10-08-codex-review.md) |
 | 10-08 | Claude | 노션 3강 페이지에 '6단계 Codex 교차 감수와 1.0.2' 추가, 비공개 브리핑 현재 상태 갱신. 다음: Codex 재감수(`6226c56..2dedb27`) | (이 커밋) | 노션(개인 공간) |
+| 10-08 | Codex | `6226c56..2dedb27` 재감수: 428개·JS 문법·공식 검사 통과, R1 해소·업로드 재시도/서버 검사 호환 확인. 중요 N1·사소 N2/N3 기록. evidence·handoff·backlog만 갱신, 코드 수정·커밋·외부 작업 없음 | 미커밋 | [재감수 증거](superpowers/evidence/2026-10-08-codex-rereview.md) |
+| 10-08 | Claude | Codex 재감수(N1 중요·N2·N3 사소) 확인 → Node 동작 테스트로 재현 후 모두 수정, 테스트 431개. 1.0.3 공개는 사용자 결정 대기 | (이 커밋) | [재감수](superpowers/evidence/2026-10-08-codex-rereview.md) |

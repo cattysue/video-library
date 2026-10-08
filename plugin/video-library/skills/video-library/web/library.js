@@ -121,6 +121,9 @@
 
   const uploadFailed = (job) => job.status === "done" && !!job.steps && job.steps.upload === "failed";
 
+  // PC 는 완료면 강의가 있다. Railway 는 업로드가 실패했을 수 있으니 목록에 있을 때만(재감수 N3)
+  const canView = (job) => job.status === "done" && (!state.hosted || state.lectures.some((l) => l.id === job.lecture_id));
+
   function visible(job) {
     if (state.dismissed.has(job.job_id)) return false;
     if (uploadFailed(job)) return true; // 닫을 때까지 남긴다
@@ -140,7 +143,7 @@
       VL.el("div", { class: "job-head" },
         VL.el("span", { class: "job-title", text: job.title || job.lecture_id }),
         VL.el("span", { class: "job-status", text: status }),
-        job.status === "done" ? VL.el("a", { class: "btn small", href: `/lecture?id=${encodeURIComponent(job.lecture_id)}` }, "보기") : null,
+        canView(job) ? VL.el("a", { class: "btn small", href: `/lecture?id=${encodeURIComponent(job.lecture_id)}` }, "보기") : null,
         VL.el("button", { class: "btn small ghost", type: "button", "aria-label": "진행 카드 닫기",
           onclick: () => { state.dismissed.add(job.job_id); saveDismissed(); pollJobs(); } }, "×")),
       VL.el("div", { class: "steps" }, ...steps),
@@ -193,7 +196,11 @@
     loadLectures();
     pollJobs();
     setInterval(pollJobs, 2000);
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) pollJobs(); });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) return;
+      pollJobs();
+      loadLectures(); // 숨긴 동안 끝난 강의도 보이게(재감수 N1)
+    });
     VL.watchServer();
     $("#search").addEventListener("input", onSearchInput);
   }
