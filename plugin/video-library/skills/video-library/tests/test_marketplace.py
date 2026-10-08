@@ -32,7 +32,7 @@ def test_manifests_agree():
     codex = load("plugin/video-library/.codex-plugin/plugin.json")
     for manifest in (claude, codex):
         assert manifest["name"] == "video-library"
-        assert manifest["version"] == "1.0.2"
+        assert manifest["version"] == "1.0.3"
         assert manifest["license"] == "MIT"
         assert manifest["repository"] == "https://github.com/cattysue/video-library"
         assert manifest["description"] and manifest["author"]["name"]

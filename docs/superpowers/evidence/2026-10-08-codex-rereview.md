@@ -106,5 +106,8 @@ N1을 먼저 동작 테스트로 재현하고 수정할 것을 권한다. N2·N3
 | 사소 N2 | `test_upload_failed_job_stays_listed_until_dismissed`: 5시간 지난 업로드 실패 기록이 목록에 남아야 함 → 빠짐(실패) | PC·서버 공통 `list_jobs`에서 done+upload failed 기록은 시간 제한 없이 반환(화면에서 닫을 때까지) |
 | 사소 N3 | `test_view_link_only_when_lecture_exists`: Railway 관리자 화면에서 강의가 없으면 [보기] 없음, PC는 있음 → Railway에서도 생김(실패) | Railway에서는 목록에 그 강의가 있을 때만 [보기] |
 
-결과: 전체 `431 passed`. 아직 공개(1.0.3)하지 않음 — 사용자 결정.
+결과: 전체 `431 passed`.
 
+**공개 전 실제 브라우저 확인(시험용 자료실)**: 브라우저 창이 숨겨진 상태에서는 진행 카드를 조회하지 않음(R3) ✓ → 숨긴 동안 강의 1편 추가 → 다시 보이게 하자 목록 카드 1→2개(N1) ✓ / 3시간 전 업로드 실패 작업이 주황 경고 카드로 남음(N2), PC 화면 [보기] 유지 ✓ / 콘솔 오류 없음. N3(Railway 관리자 화면)는 관리자 비밀번호가 필요해 동작 테스트로만 확인.
+
+사용자 승인(10-08)으로 **1.0.3** 공개: GitHub `main`, Claude Code·Codex 설치본, Railway.

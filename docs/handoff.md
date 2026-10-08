@@ -70,3 +70,4 @@
 | 10-08 | Claude | 노션 3강 페이지에 '6단계 Codex 교차 감수와 1.0.2' 추가, 비공개 브리핑 현재 상태 갱신. 다음: Codex 재감수(`6226c56..2dedb27`) | (이 커밋) | 노션(개인 공간) |
 | 10-08 | Codex | `6226c56..2dedb27` 재감수: 428개·JS 문법·공식 검사 통과, R1 해소·업로드 재시도/서버 검사 호환 확인. 중요 N1·사소 N2/N3 기록. evidence·handoff·backlog만 갱신, 코드 수정·커밋·외부 작업 없음 | 미커밋 | [재감수 증거](superpowers/evidence/2026-10-08-codex-rereview.md) |
 | 10-08 | Claude | Codex 재감수(N1 중요·N2·N3 사소) 확인 → Node 동작 테스트로 재현 후 모두 수정, 테스트 431개. 1.0.3 공개는 사용자 결정 대기 | (이 커밋) | [재감수](superpowers/evidence/2026-10-08-codex-rereview.md) |
+| 10-08 | Claude | 재감수 수정 실제 브라우저 확인(N1·N2 ✓) 후 **1.0.3** 공개: GitHub `main`, Claude Code·Codex 설치본, Railway | (이 커밋) | [재감수](superpowers/evidence/2026-10-08-codex-rereview.md) |
