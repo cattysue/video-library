@@ -83,6 +83,9 @@ def _json_or_empty(raw: bytes) -> dict:
 
 def report_job(home, job: dict, timeout: float = REPORT_TIMEOUT_SEC) -> bool:
     """진행 상황을 Railway 에도 알린다. 설정이 없거나 실패하면 조용히 넘어간다(처리는 계속)."""
+    steps = job.get("steps") if isinstance(job, dict) else None
+    if not isinstance(steps, dict) or steps.get("upload") == "skipped":
+        return False  # 이번 작업은 PC에만 둔다(--no-upload 또는 업로드 대상 아님) → 진행 정보도 보내지 않는다
     cfg = load_config(home)
     if not cfg:
         return False

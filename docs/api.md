@@ -76,7 +76,7 @@
 - Railway 서버(`vl.py serve --hosted`)는 볼륨 `/data`에 PC와 같은 파일 형식으로 저장하고, 공개 목록은 `/data/visibility.json` `{"public": [<ID>, …]}`에 둔다(깨지거나 없으면 아무것도 공개하지 않음). 정적 파일은 이미지에 들어 있는 `web/`에서 낸다. `Host` 검사는 하지 않는다.
 - 업로드 토큰: `Authorization: Bearer <토큰>` 헤더(`PUT /api/lectures/<id>`, `POST /api/jobs/<job_id>`). 토큰은 `영상자료실/config.json`(공개 금지)에서 읽고, 서버는 `VL_UPLOAD_TOKEN_HASH`(SHA-256)와 비교한다. 틀리면 401.
 - 관리자: `POST /api/login` `{"password"}` → 세션 쿠키 `vl_session`(`HttpOnly; Secure; SameSite=Strict`, 12시간). 비밀번호는 `VL_ADMIN_PASSWORD_HASH`(PBKDF2-SHA256)와 비교. 15분에 10번 실패하면 15분 잠금(429). `POST /api/login`·`/api/logout`·`PATCH`·`DELETE`는 `X-Requested-With: video-library` 헤더가 없으면 403, 로그인하지 않았으면 401.
-- 본문: JSON. 업로드 최대 20MB, 그 밖 64KB. `Content-Length`가 없으면 411, 넘으면 413, JSON이 아니면 400. 업로드는 서버가 `validate_lecture`로 다시 검사하고 주소의 ID와 `lecture.id`가 같아야 한다(아니면 400). 진행 보고는 `jobs/<job_id>.json` 형식(시간대 있는 시각, 정해진 키만)이어야 한다.
+- 본문: JSON. 업로드 최대 20MB, 그 밖 64KB. `Content-Length`가 없으면 411, 넘으면 413, JSON이 아니면 400. 업로드는 서버가 `validate_lecture`로 다시 검사하고 주소의 ID와 `lecture.id`가 같아야 한다(아니면 400). 진행 보고는 `jobs/<job_id>.json` 형식(시간대 있는 시각, 정해진 키만)이어야 한다. PC는 **업로드 대상 작업만**(업로드 단계가 `skipped`가 아닌 작업) 진행을 보고한다 — `--no-upload`로 처리한 강의는 제목·ID도 서버로 보내지 않는다(10-08 감수 R1).
 - 응답: 업로드 `{"id","public"}`(새 강의 `false`, 재업로드는 기존 공개 상태 유지), 공개 전환 `{"id","public"}`, 삭제 `{"id","deleted":true}`, 진행 보고 `{"job_id"}`. 로그인하지 않은 사람에게 비공개 강의는 목록·검색에서 빠지고 단건은 404, `GET /api/jobs`는 401.
 
 ### 검색 응답

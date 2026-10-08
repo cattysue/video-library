@@ -161,3 +161,20 @@ def test_broken_reply_does_not_stop_processing(home):
     finally:
         srv.shutdown()
         srv.server_close()
+
+
+def test_no_report_when_upload_is_skipped(home, fake):
+    # 감수 R1(10-08 Codex): 이번 강의를 PC에만 두기로 했으면(--no-upload) 진행 정보도 서버로 보내지 않는다
+    remote.save_config(home, fake.url, "tok")
+    job = jobs.start_job(home, VIDEO_ID, "깃 기초", jobs.initial_steps(False, upload_enabled=False))
+    jobs.set_step(home, job["job_id"], "preprocess", "done")
+    jobs.finish_job(home, job["job_id"], {})
+    assert fake.calls == []
+
+
+def test_fetch_no_upload_sends_nothing(home, fake):
+    from test_fetch import NOW, URL, factory, info
+    from video_library import fetch as fetch_mod
+    remote.save_config(home, fake.url, "tok")
+    out = fetch_mod.fetch(URL, home, ydl_factory=factory(info()), now=NOW, upload=False)
+    assert out["upload"] is False and fake.calls == []

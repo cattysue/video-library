@@ -13,17 +13,20 @@
 | 3단계 화면 + PC 서버 | 완료 — store_file·search·server·opener, 목록·강의 화면, `vl.py open/serve/search`, 실제 영상 4편(개발·과학 EN→KO·금융·의학) 화면 확인 (`main`에 합침), 최종 검토 중요 5건 수정, 분야 단추·[보기] 조약돌 디자인, 테스트 307개 | [증거](superpowers/evidence/2026-10-06-stage3-viewer.md), [API](api.md) |
 | 4단계 Railway | 완료 — 공개 서버 모드·로그인·업로드·connect, 최종 검토 수정, Railway 배포(`https://video-library-production-8b85.up.railway.app`, 데모 1편 공개), 테스트 396개 (`main`에 합침) | [계획](superpowers/plans/2026-10-06-stage4-railway.md) |
 | 5단계 마켓플레이스 | 완료 — 공개 저장소 https://github.com/cattysue/video-library (MIT), Claude Code·Codex 마켓플레이스 설치 확인(새 대화에서 영상자료실 열림), README·1:1 수업 안내서, Railway 재배포 | [증거](superpowers/evidence/2026-10-06-stage5-marketplace.md) |
+| 미공개 변경 | `6226c56`(오류 처리·README·backlog 보완), `0351a52`(AGENTS.md) — 감수 시작 시 로컬 추적 `origin/main`보다 2커밋 앞섬. 매니페스트 2개는 아직 1.0.1 | `git log origin/main..HEAD` |
+| 10-08 Codex 감수 | 전체 424개·JS 문법·공식 매니페스트 검사 통과. 치명 미발견, 중요 1(`--no-upload`에도 진행 정보 전송)·사소 3 확인. 제품 코드 수정 없음 | [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) |
 
 **다음에 할 일:**
-1. 하루 뒤 Railway 사용액 확인.
-2. 수정 배포 방법: 버전 올리기(두 `plugin.json`) → 테스트 → `main`만 push(`private-history` 절대 금지) → 설치본 `claude plugin marketplace update video-library` + `claude plugin update video-library@video-library`, Codex `codex plugin marketplace upgrade video-library` + `codex plugin add video-library@video-library` → Railway `railway up`.
-3. 과제 제출: 체크리스트 ①마켓플레이스(공개 저장소) ②1:1 수업(`docs/ta-guide.md`) ③웹(Railway 주소). 미뤄 둔 사소한 점은 4·5단계 증거 문서 참고.
+1. 공개 전 중요 R1 수정 권장: `--no-upload` 작업은 진행 보고도 서버에 보내지 않게 실패 테스트부터 추가. [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) 참고.
+2. 미공개 2커밋과 수정분의 다음 버전 공개 여부는 사용자 결정 대기. Railway 실사용액은 아직 미확인.
+3. 수정 배포 방법(단계마다 승인): 버전 올리기(두 `plugin.json`·테스트 기대값) → 테스트·공식 검사 → `main`만 push(`private-history` 절대 금지) → 설치본 `claude plugin marketplace update video-library` + `claude plugin update video-library@video-library`, Codex `codex plugin marketplace upgrade video-library` + `codex plugin add video-library@video-library` → Railway `railway up`.
+4. 과제 제출: ①마켓플레이스·③웹은 기존 evidence상 완료, ②1:1 수업은 안내서(`docs/ta-guide.md`) 준비·실제 수업 대기. 남은 사소한 점은 `docs/backlog.md` 참고. 이번 검토는 로컬 기준이며 운영·설치본을 새로 확인하지 않았다.
 
 ## 2. 지켜야 할 것
 - Superpowers 절차: 설계 → 사용자 승인 → 계획 → TDD 구현 → 검토 → 검증.
 - Railway 배포, 공개 GitHub 저장소 생성, 유료 AI 호출, PC 설정 변경, 패키지 설치는 **단계마다 사용자 승인**.
 - 업로드 토큰·관리자 비밀번호는 채팅·Git·문서에 남기지 않는다. AI는 토큰을 묻거나 출력하지 않는다.
-- 이 저장소는 공개될 예정이다. 남의 영상 내용, 개인 경로·계정 정보를 넣지 않는다.
+- 이 저장소는 공개돼 있다. 남의 영상 내용, 개인 경로·계정 정보를 넣지 않는다.
 - 사용자는 비개발자 학습자다. 기술용어는 짧게 설명하고 성공·실패·미확인을 나눠 보고한다.
 
 ## 3. 진행 기록 (새 작업은 맨 아래에 추가)
@@ -60,3 +63,5 @@
 | 10-07 | Claude | 노션 학습 노트에 3강 설계·1~2단계 페이지 추가, 3~5단계 페이지·허브와 서로 연결 | (이 커밋) | 노션(개인 공간) |
 | 10-07 | Claude | 미뤄 둔 사소한 점 정리: 사용자 영향 큰 것 수정(ID 정규식, CSP, 멈춘 진행 카드, 진행 상세 200자, 업로드 안내 2건, README Mac·Railway·업데이트·제거), 나머지는 `docs/backlog.md`에 우선순위로. 테스트 424개. 공개(1.0.2)는 사용자 결정 대기 | (이 커밋) | `docs/backlog.md` |
 | 10-08 | Claude | Codex와의 교차 개발·감수를 위한 `AGENTS.md`(공개용 기술 규칙) 추가. 전체 브리핑은 비공개 바깥 저장소 `docs/plugin-app-briefing.md` | (이 커밋) | `AGENTS.md` |
+| 10-08 | Codex | 미공개 2커밋과 현재 구현 감수: 424개 테스트·JS 문법·공식 검사 통과, 기존 중요 1·사소 3 확인. evidence·현재 상태·backlog 갱신, 제품 코드 수정·커밋·외부 배포 없음 | 미커밋 | [감수 증거](superpowers/evidence/2026-10-08-codex-review.md) |
+| 10-08 | Claude | Codex 감수 R1(업로드 생략 작업도 진행 정보 전송) 실패 테스트로 재현 → 수정, 테스트 426개. 미공개 커밋 3개(1.0.2 후보) | (이 커밋) | [감수](superpowers/evidence/2026-10-08-codex-review.md) |
